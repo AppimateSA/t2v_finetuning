@@ -1014,19 +1014,19 @@ if __name__ == "__main__":
     parser.add_argument("--experiment_num", type=int, default=1, required=True)
     args = parser.parse_args()
     config = OmegaConf.load(args.config)
-    if args.use_wandb:
-        try:
-            if wandb.api.api_key is None:
-                key = getpass("Access key: ")
-                wandb.login(key=key, relogin=True)
-        except ValueError as e:
-            print(e)
-        if wandb.run is not None: # 🐝 Open your wandb run 
-            wandb.init(
-                project="autovisual-t2v_stablediffusion",
-                name=f"experiment_{ args.experiment_num }",
-                job_type="train-job",
-                config=config,
-            )
+    # if args.use_wandb:
+    #     try:
+    #         if wandb.api.api_key is None:
+    #             key = getpass("Access key: ")
+    #             wandb.login(key=key, relogin=True)
+    #     except ValueError as e:
+    #         print(e)
+    #     if wandb.run is not None: # 🐝 Open your wandb run 
+    #         wandb.init(
+    #             project="autovisual-t2v_stablediffusion",
+    #             name=f"experiment_{ args.experiment_num }",
+    #             job_type="train-job",
+    #             config=config,
+    #         )
 
     main(**config)
